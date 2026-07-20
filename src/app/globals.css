@@ -1,26 +1,60 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Couleurs extraites des variables Figma Kasa */
+  --main-red: #99331a;
+  --dark-orange: #842c16;
+  --light-orange: #fffbf9;
+  --noir: #0d0d0d;
+  --blanc: #ffffff;
+  --gris-light: #f5f5f5;
+  --gris-dark: #565656;
+
+  --background: var(--light-orange);
+  --foreground: var(--noir);
 }
 
-@theme inline {
+/* stylelint-disable-next-line at-rule-no-unknown */
+/* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-main-red: var(--main-red);
+  --color-dark-orange: var(--dark-orange);
+  --color-light-orange: var(--light-orange);
+  --color-noir: var(--noir);
+  --color-blanc: var(--blanc);
+  --color-gris-light: var(--gris-light);
+  --color-gris-dark: var(--gris-dark);
+  --font-sans: var(--font-inter);
+} */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    box-sizing: border-box;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  html {
+    min-width: 320px;
+    background: var(--background);
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
