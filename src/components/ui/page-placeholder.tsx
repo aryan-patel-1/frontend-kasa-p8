@@ -4,6 +4,7 @@ type PagePlaceholderProps = Readonly<{
   description?: string;
 }>;
 
+// Maintient une présentation cohérente pour les écrans encore incomplets
 export function PagePlaceholder({
   title,
   eyebrow,

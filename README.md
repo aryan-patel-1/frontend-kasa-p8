@@ -14,9 +14,22 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+## Data source
+
+Copy `.env.example` to `.env.local`, then choose the data source:
+
+```bash
+USE_MOCK=true
+```
+
+- `true`: use the local data from `src/mocks`
+- `false`: use the API files from `src/api`
+
+The API methods are prepared but not implemented yet.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 

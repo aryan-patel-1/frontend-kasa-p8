@@ -1,0 +1,42 @@
+import type { PropertyFormOptions } from "@/types/property-form-options";
+
+// Centralise les choix affichés dans le formulaire de logement
+export const mockPropertyFormOptions: PropertyFormOptions = {
+  equipments: [
+    "Micro-ondes",
+    "Clic-clac",
+    "Douche italienne",
+    "Four",
+    "Réfrigérateur",
+    "Rangements",
+    "Wi-Fi",
+    "Lit",
+    "Parking",
+    "Bouilloire",
+    "Sèche-cheveux",
+    "Salle de bain",
+    "Machine à laver",
+    "Toilettes sèches",
+    "Cuisine équipée",
+    "Cintres",
+    "Télévision",
+    "Baie vitrée",
+    "Chambre séparée",
+    "Hotte",
+    "Climatisation",
+    "Baignoire",
+    "Réfrigérateur américain",
+    "Vue sur parc",
+  ],
+  categories: [
+    "Parc",
+    "Vie nocturne",
+    "Culture",
+    "Nature",
+    "Touristique",
+    "Vue sur mer",
+    "Pour les couples",
+    "Famille",
+    "Forêt",
+  ],
+};

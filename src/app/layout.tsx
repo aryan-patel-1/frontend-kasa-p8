@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+// Rend la police disponible dans les classes Tailwind
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],

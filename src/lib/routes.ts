@@ -1,3 +1,4 @@
+// Centralise les chemins pour éviter les liens écrits en double
 export const ROUTES = {
   home: "/",
   about: "/about",
