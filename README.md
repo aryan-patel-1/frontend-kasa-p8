@@ -24,12 +24,20 @@ Copy `.env.example` to `.env.local`, then choose the data source:
 
 ```bash
 USE_MOCK=true
+API_URL=http://localhost:3000
 ```
 
 - `true`: use the local data from `src/mocks`
 - `false`: use the API files from `src/api`
 
-The API methods are prepared but not implemented yet.
+Les appels API des logements, favoris et messages restent à implémenter.
+
+## Connexion
+
+Lancez aussi le backend sur `http://localhost:3000`, puis ouvrez la page
+`http://localhost:3001/sign-up` pour créer un compte. L’utilisateur est
+enregistré dans la base SQLite du backend et peut ensuite se connecter sur
+`http://localhost:3001/login`.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
