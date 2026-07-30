@@ -24,6 +24,7 @@ const steps = [
 ];
 
 export default async function HomePage() {
+  // Charge la liste depuis le mock ou l'API selon USE_MOCK
   const properties = await dataProvider.getProperties();
 
   return (

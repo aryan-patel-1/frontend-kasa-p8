@@ -1,13 +1,7 @@
 import {
-  getApiConversationById,
-  getApiConversations,
-} from "@/api/conversations";
-import { getApiFavoriteProperties } from "@/api/favorites";
-import {
   getApiProperties,
   getApiPropertyById,
 } from "@/api/properties";
-import { getApiPropertyFormOptions } from "@/api/property-form-options";
 import { mockConversations } from "@/mocks/conversations";
 import { mockFavoritePropertyIds } from "@/mocks/favorites";
 import { mockProperties } from "@/mocks/properties";
@@ -16,7 +10,7 @@ import type { Conversation } from "@/types/message";
 import type { Property } from "@/types/property";
 import type { PropertyFormOptions } from "@/types/property-form-options";
 
-// Impose les mêmes méthodes aux données mockées et aux données API
+// Garantit que le mock et l'API fournissent les mêmes méthodes aux pages
 type DataProvider = {
   getProperties: () => Promise<Property[]>;
   getPropertyById: (id: string) => Promise<Property | null>;
@@ -26,7 +20,7 @@ type DataProvider = {
   getPropertyFormOptions: () => Promise<PropertyFormOptions>;
 };
 
-// Lit uniquement les fichiers locaux du dossier mocks
+// Retourne les données locales sans effectuer de requête réseau
 const mockDataProvider: DataProvider = {
   async getProperties() {
     return [...mockProperties];
@@ -64,17 +58,15 @@ const mockDataProvider: DataProvider = {
   },
 };
 
-// Relie chaque méthode aux fichiers réseau encore à compléter
+// Remplace seulement les méthodes dont les routes API sont prêtes
 const apiDataProvider: DataProvider = {
+  ...mockDataProvider,
   getProperties: getApiProperties,
   getPropertyById: getApiPropertyById,
-  getFavoriteProperties: getApiFavoriteProperties,
-  getConversations: getApiConversations,
-  getConversationById: getApiConversationById,
-  getPropertyFormOptions: getApiPropertyFormOptions,
 };
 
-// Active les mocks par défaut pour garder le frontend utilisable seul
-export const USE_MOCK = process.env.USE_MOCK?.toLowerCase() !== "false";
+// true utilise les mocks et false utilise le backend local
+export const USE_MOCK = false;
 
+// Les pages utilisent toujours ce fournisseur sans connaître la source choisie
 export const dataProvider = USE_MOCK ? mockDataProvider : apiDataProvider;

@@ -11,6 +11,7 @@ export async function generateMetadata(
   props: PageProps<"/properties/[id]">,
 ): Promise<Metadata> {
   const { id } = await props.params;
+  // Utilise le logement pour renseigner le titre de l'onglet
   const property = await dataProvider.getPropertyById(id);
 
   return {
@@ -23,6 +24,7 @@ export default async function PropertyPage(
   props: PageProps<"/properties/[id]">,
 ) {
   const { id } = await props.params;
+  // Utilise l'identifiant placé dans le lien de chaque carte
   const property = await dataProvider.getPropertyById(id);
 
   if (!property) {
@@ -30,7 +32,9 @@ export default async function PropertyPage(
   }
 
   // Limite la galerie aux cinq emplacements de la maquette
-  const galleryPictures = [property.cover, ...property.pictures].slice(0, 5);
+  const galleryPictures = [property.cover, ...property.pictures]
+    .filter((picture): picture is string => picture !== null)
+    .slice(0, 5);
 
   return (
     <div className="flex min-h-dvh flex-col items-center bg-light-orange">
@@ -58,33 +62,39 @@ export default async function PropertyPage(
                 className="grid grid-cols-4 gap-2 lg:h-[358px] lg:grid-cols-[303px_147px_147px] lg:grid-rows-2 lg:gap-[10px]"
               >
                 {/* La première image occupe toute la hauteur sur desktop */}
-                {galleryPictures.map((picture, index) => (
-                  <div
-                    key={picture}
-                    className={
-                      index === 0
-                        ? "relative col-span-4 h-[422px] overflow-hidden rounded-[10px] lg:col-span-1 lg:row-span-2 lg:h-auto"
-                        : "relative h-[110px] overflow-hidden rounded-[8px] lg:h-auto lg:rounded-[10px]"
-                    }
-                  >
-                    <Image
-                      src={picture}
-                      alt={
+                {galleryPictures.length > 0 ? (
+                  galleryPictures.map((picture, index) => (
+                    <div
+                      key={picture}
+                      className={
                         index === 0
-                          ? property.title
-                          : `Vue ${index + 1} de ${property.title}`
+                          ? "relative col-span-4 h-[422px] overflow-hidden rounded-[10px] lg:col-span-1 lg:row-span-2 lg:h-auto"
+                          : "relative h-[110px] overflow-hidden rounded-[8px] lg:h-auto lg:rounded-[10px]"
                       }
-                      fill
-                      priority={index === 0}
-                      sizes={
-                        index === 0
-                          ? "(max-width: 767px) calc(100vw - 32px), 303px"
-                          : "(max-width: 767px) 25vw, 147px"
-                      }
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
+                    >
+                      <Image
+                        src={picture}
+                        alt={
+                          index === 0
+                            ? property.title
+                            : `Vue ${index + 1} de ${property.title}`
+                        }
+                        fill
+                        priority={index === 0}
+                        sizes={
+                          index === 0
+                            ? "(max-width: 767px) calc(100vw - 32px), 303px"
+                            : "(max-width: 767px) 25vw, 147px"
+                        }
+                        className="object-cover"
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p className="col-span-4 flex h-[422px] items-center justify-center rounded-[10px] bg-gris-light text-sm text-gris-dark lg:col-span-3 lg:h-[358px]">
+                    Aucune photo disponible
+                  </p>
+                )}
               </section>
 
               <section className="mt-[10px] rounded-[10px] border border-gris-light bg-blanc px-6 py-7 lg:min-h-[489px]">
@@ -136,13 +146,20 @@ export default async function PropertyPage(
               <h2 className="text-base font-medium">Votre hôte</h2>
 
               <div className="mt-6 flex items-center gap-5">
-                <Image
-                  src={property.host.picture}
-                  alt={property.host.name}
-                  width={80}
-                  height={80}
-                  className="size-20 rounded-[10px] object-cover"
-                />
+                {/* La photo vient du champ host.picture du backend */}
+                {property.host.picture ? (
+                  <Image
+                    src={property.host.picture}
+                    alt={property.host.name}
+                    width={80}
+                    height={80}
+                    className="size-20 rounded-[10px] object-cover"
+                  />
+                ) : (
+                  <p className="flex size-20 items-center justify-center rounded-[10px] bg-gris-light px-2 text-center text-xs text-gris-dark">
+                    Photo indisponible
+                  </p>
+                )}
                 <p className="text-base">{property.host.name}</p>
                 <p className="ml-auto flex h-10 items-center gap-2 rounded-[10px] bg-gris-light px-3 text-base">
                   <Image

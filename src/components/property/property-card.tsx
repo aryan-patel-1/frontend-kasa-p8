@@ -21,13 +21,19 @@ export function PropertyCard({
     >
       <article className="overflow-hidden rounded-[10px] bg-blanc">
         <div className="relative aspect-[355/384] w-full overflow-hidden">
-          <Image
-            src={property.cover}
-            alt={property.title}
-            fill
-            sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) 50vw, 355px"
-            className="object-cover"
-          />
+          {property.cover ? (
+            <Image
+              src={property.cover}
+              alt={property.title}
+              fill
+              sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) 50vw, 355px"
+              className="object-cover"
+            />
+          ) : (
+            <p className="flex size-full items-center justify-center bg-gris-light text-sm text-gris-dark">
+              Image indisponible
+            </p>
+          )}
           <span
             className={`group absolute right-4 top-4 flex size-8 items-center justify-center rounded transition-colors duration-200 ${
               isFavorite ? "bg-main-red" : "bg-blanc hover:bg-main-red"

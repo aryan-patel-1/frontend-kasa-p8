@@ -20,17 +20,14 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 ## Data source
 
-Copy `.env.example` to `.env.local`, then choose the data source:
+La constante `USE_MOCK` dans `src/data/data-provider.ts` choisit la source :
 
-```bash
-USE_MOCK=true
-API_URL=http://localhost:3000
-```
+- `true` utilise les données locales de `src/mocks`
+- `false` utilise le backend local sur `http://localhost:3000`
 
-- `true`: use the local data from `src/mocks`
-- `false`: use the API files from `src/api`
-
-Les appels API des logements, favoris et messages restent à implémenter.
+L’API des logements alimente la page d’accueil et la fiche détail. Les favoris,
+les messages et les options du formulaire restent alimentés par les mocks en
+attendant la connexion de leurs routes API.
 
 ## Connexion
 

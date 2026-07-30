@@ -2,7 +2,7 @@
 export type Host = {
   id: number;
   name: string;
-  picture: string;
+  picture: string | null;
 };
 
 // Utilise une forme adaptée aux composants du frontend
@@ -10,7 +10,7 @@ export type Property = {
   id: string;
   slug: string;
   title: string;
-  cover: string;
+  cover: string | null;
   pictures: string[];
   description: string;
   host: Host;
