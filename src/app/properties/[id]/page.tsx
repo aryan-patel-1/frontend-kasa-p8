@@ -51,7 +51,7 @@ export default async function PropertyPage(
             width={8}
             height={6}
           />
-          Retour aux annonces
+          Retour
         </Link>
 
         <div className="mt-[10px] border-t border-gris-light pt-6 lg:mt-4">
@@ -173,14 +173,16 @@ export default async function PropertyPage(
               </div>
 
               <div className="mt-6 flex flex-col gap-2">
-                <button
-                  type="button"
-                  className="h-9 rounded-[10px] bg-main-red text-sm text-blanc"
+                <Link
+                  href={ROUTES.contactHost(property.id)}
+                  prefetch={false}
+                  className="flex h-9 items-center justify-center rounded-[10px] bg-main-red text-sm text-blanc"
                 >
                   Contacter l’hôte
-                </button>
+                </Link>
                 <Link
-                  href={ROUTES.messages}
+                  href={ROUTES.contactHost(property.id)}
+                  prefetch={false}
                   className="flex h-9 items-center justify-center rounded-[10px] bg-main-red text-sm text-blanc"
                 >
                   Envoyer un message

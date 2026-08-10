@@ -1,5 +1,9 @@
 import { getApiFavoriteProperties } from "@/api/favorites";
 import {
+  getApiConversationById,
+  getApiConversations,
+} from "@/api/conversations";
+import {
   getApiProperties,
   getApiPropertyById,
 } from "@/api/properties";
@@ -65,6 +69,8 @@ const apiDataProvider: DataProvider = {
   getProperties: getApiProperties,
   getPropertyById: getApiPropertyById,
   getFavoriteProperties: getApiFavoriteProperties,
+  getConversations: getApiConversations,
+  getConversationById: getApiConversationById,
 };
 
 // true utilise les mocks et false utilise le backend local

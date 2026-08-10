@@ -44,3 +44,7 @@ next-env.d.ts
 # local agent files
 AGENTS.md
 /explications.md
+/add-property.md
+/property-role-problem.md
+/.data/
+/messaging.md

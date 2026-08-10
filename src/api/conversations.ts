@@ -1,14 +1,16 @@
 import type { Conversation } from "@/types/message";
+import {
+  getStoredConversationById,
+  getStoredConversations,
+} from "@/lib/conversation-store";
 
-// Réserve les appels réseau pour la future messagerie
+// Lit la même source persistante que les routes API de la messagerie
 export async function getApiConversations(): Promise<Conversation[]> {
-  throw new Error("La récupération API des conversations reste à implémenter");
+  return getStoredConversations();
 }
 
 export async function getApiConversationById(
   id: string,
 ): Promise<Conversation | null> {
-  throw new Error(
-    `La récupération API de la conversation ${id} reste à implémenter`,
-  );
+  return getStoredConversationById(id);
 }

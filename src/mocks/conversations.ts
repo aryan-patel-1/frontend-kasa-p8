@@ -4,6 +4,7 @@ import type { Conversation } from "@/types/message";
 export const mockConversations: Conversation[] = [
   {
     id: "nathalie-jean",
+    participantId: 1,
     participantName: "Nathalie Jean",
     participantPicture: "/img/avatars/nathalie-jean.webp",
     preview: "Bonjour, votre appartement est-il disponible...",

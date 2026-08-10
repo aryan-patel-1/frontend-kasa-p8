@@ -7,7 +7,7 @@ import { dataProvider } from "@/data/data-provider";
 
 export const metadata: Metadata = {
   title: "Messagerie",
-  description: "Consultez votre discussion de démonstration Kasa.",
+  description: "Consultez vos conversations et envoyez des messages sur Kasa.",
 };
 
 export default async function MessagesPage() {

@@ -10,6 +10,7 @@ export type Message = {
 // Regroupe le résumé et les messages d'une même discussion
 export type Conversation = {
   id: string;
+  participantId?: number;
   participantName: string;
   participantPicture: string | null;
   preview: string;

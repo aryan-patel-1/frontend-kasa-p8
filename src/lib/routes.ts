@@ -8,6 +8,8 @@ export const ROUTES = {
   messages: "/messages",
   signUp: "/sign-up",
   property: (id: string) => `/properties/${id}`,
+  contactHost: (propertyId: string) =>
+    `/messages/contact/${propertyId}`,
   conversation: (conversationId: string) =>
     `/messages/${conversationId}`,
 } as const;
