@@ -114,6 +114,15 @@ Example:
 - Avoid optimization before there is a measured or visible problem
 - Do not create configuration files that are not needed
 
+## Local code explanations
+
+- Keep `explications.md` up to date whenever code is added changed or removed
+- Update `explications.md` progressively while working instead of waiting until the end
+- Explain new files components routes and data flows in simple French
+- Include clickable Markdown links to the relevant file paths and line numbers and keep those references accurate
+- Keep the explanations organized by feature or file so they remain easy to follow
+- Keep `explications.md` local and ignored by Git
+
 ## Quality checks
 
 - Run ESLint after changing source code

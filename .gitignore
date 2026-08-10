@@ -41,5 +41,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local agent instructions
+# local agent files
 AGENTS.md
+/explications.md

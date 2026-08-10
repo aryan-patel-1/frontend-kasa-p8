@@ -25,9 +25,10 @@ La constante `USE_MOCK` dans `src/data/data-provider.ts` choisit la source :
 - `true` utilise les données locales de `src/mocks`
 - `false` utilise le backend local sur `http://localhost:3000`
 
-L’API des logements alimente la page d’accueil et la fiche détail. Les favoris,
-les messages et les options du formulaire restent alimentés par les mocks en
-attendant la connexion de leurs routes API.
+L’API des logements alimente la page d’accueil et la fiche détail. Les favoris
+sont synchronisés avec le compte connecté. Les messages et les options du
+formulaire restent alimentés par les mocks en attendant la connexion de leurs
+routes API.
 
 ## Connexion
 

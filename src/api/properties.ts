@@ -1,7 +1,7 @@
 import type { Property } from "@/types/property";
 
 // Représente exactement les champs renvoyés par le backend
-type ApiProperty = {
+export type ApiProperty = {
   id: string;
   slug?: string;
   title: string;
@@ -43,7 +43,7 @@ function getImageUrl(image: string | null | undefined) {
 }
 
 // Adapte les noms snake case du backend aux noms camelCase du frontend
-function mapApiProperty(apiProperty: ApiProperty): Property {
+export function mapApiProperty(apiProperty: ApiProperty): Property {
   // Conserve null pour ne jamais remplacer une image du backend
   const cover = getImageUrl(apiProperty.cover);
 

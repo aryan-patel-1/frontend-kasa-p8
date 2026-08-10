@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { SubmitEvent, useState } from "react";
 import { ROUTES } from "@/lib/routes";
 
 export function SignUpForm() {
@@ -10,7 +10,7 @@ export function SignUpForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     setErrorMessage("");
     setIsLoading(true);
@@ -18,6 +18,7 @@ export function SignUpForm() {
     const formData = new FormData(event.currentTarget);
 
     try {
+      // Envoie les champs à la route Next.js reliée au backend
       const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -35,6 +36,7 @@ export function SignUpForm() {
         return;
       }
 
+      // Affiche l’accueil après la création du compte
       router.push(ROUTES.home);
       router.refresh();
     } catch {

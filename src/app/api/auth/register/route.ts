@@ -51,6 +51,7 @@ export async function POST(request: Request) {
   }
 
   try {
+    // Regroupe le prénom et le nom dans le champ attendu par le backend
     const response = await fetch(`${API_URL}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -80,6 +81,7 @@ export async function POST(request: Request) {
       );
     }
 
+    // Garde le jeton dans un cookie inaccessible au JavaScript de la page
     const cookieStore = await cookies();
     cookieStore.set("kasa-token", result.token, {
       httpOnly: true,

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { PropertyCard } from "@/components/property/property-card";
-import { dataProvider } from "@/data/data-provider";
+import { dataProvider, USE_MOCK } from "@/data/data-provider";
 
 export const metadata: Metadata = {
   title: "Favoris",
@@ -37,6 +37,8 @@ export default async function FavoritesPage() {
                   key={property.id}
                   property={property}
                   isFavorite
+                  canUpdateFavorite={!USE_MOCK}
+                  refreshAfterFavoriteUpdate
                 />
               ))}
             </div>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { PropertyCard } from "@/components/property/property-card";
-import { dataProvider } from "@/data/data-provider";
+import { dataProvider, USE_MOCK } from "@/data/data-provider";
 
 // Décrit les étapes affichées sans dépendre d'une API
 const steps = [
@@ -24,8 +24,14 @@ const steps = [
 ];
 
 export default async function HomePage() {
-  // Charge la liste depuis le mock ou l'API selon USE_MOCK
-  const properties = await dataProvider.getProperties();
+  // Récupère tous les logements du backend pour construire les cartes
+  const [properties, favoriteProperties] = await Promise.all([
+    dataProvider.getProperties(),
+    dataProvider.getFavoriteProperties(),
+  ]);
+  const favoritePropertyIds = new Set(
+    favoriteProperties.map((property) => property.id),
+  );
 
   return (
     <div className="flex min-h-dvh flex-col items-center bg-light-orange">
@@ -63,7 +69,12 @@ export default async function HomePage() {
           {/* Passe de une à trois colonnes selon la largeur */}
           <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {properties.map((property) => (
-              <PropertyCard key={property.id} property={property} />
+              <PropertyCard
+                key={property.id}
+                property={property}
+                isFavorite={favoritePropertyIds.has(property.id)}
+                canUpdateFavorite={!USE_MOCK}
+              />
             ))}
           </div>
         </section>
