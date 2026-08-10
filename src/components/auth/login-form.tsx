@@ -74,7 +74,7 @@ export function LoginForm() {
               autoComplete="email"
               required
               disabled={isLoading}
-              className="h-10 rounded border border-gris-light bg-blanc px-2.5 outline-none transition focus:border-main-red focus:ring-1 focus:ring-main-red"
+              className="h-10 rounded border border-gris-light bg-blanc px-2.5 outline-none transition-[border-color,box-shadow] focus:border-main-red focus:ring-1 focus:ring-main-red"
             />
           </div>
 
@@ -92,7 +92,7 @@ export function LoginForm() {
               autoComplete="current-password"
               required
               disabled={isLoading}
-              className="h-10 rounded border border-gris-light bg-blanc px-2.5 outline-none transition focus:border-main-red focus:ring-1 focus:ring-main-red"
+              className="h-10 rounded border border-gris-light bg-blanc px-2.5 outline-none transition-[border-color,box-shadow] focus:border-main-red focus:ring-1 focus:ring-main-red"
             />
           </div>
 
@@ -107,7 +107,7 @@ export function LoginForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="flex h-9 w-[230px] items-center justify-center rounded-[10px] bg-main-red px-8 py-2 text-sm font-medium leading-[1.426] text-blanc transition hover:bg-dark-orange focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-main-red"
+            className="flex h-9 w-[230px] items-center justify-center rounded-[10px] bg-main-red px-8 py-2 text-sm font-medium leading-[1.426] text-blanc transition-[background-color] hover:bg-dark-orange focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-main-red"
           >
             {isLoading ? "Connexion…" : "Se connecter"}
           </button>

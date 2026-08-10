@@ -4,7 +4,7 @@ import {
   getStoredConversations,
 } from "@/lib/conversation-store";
 
-// Lit la même source persistante que les routes API de la messagerie
+// Lit la source persistante partagée avec les routes de la messagerie
 export async function getApiConversations(): Promise<Conversation[]> {
   return getStoredConversations();
 }

@@ -1,12 +1,12 @@
-import { getApiFavoriteProperties } from "@/api/favorites";
+import { getApiFavoriteProperties } from "@/services/favorites";
 import {
   getApiConversationById,
   getApiConversations,
-} from "@/api/conversations";
+} from "@/services/conversations";
 import {
   getApiProperties,
   getApiPropertyById,
-} from "@/api/properties";
+} from "@/services/properties";
 import { mockConversations } from "@/mocks/conversations";
 import { mockFavoritePropertyIds } from "@/mocks/favorites";
 import { mockProperties } from "@/mocks/properties";

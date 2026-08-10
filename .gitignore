@@ -48,3 +48,6 @@ AGENTS.md
 /property-role-problem.md
 /.data/
 /messaging.md
+
+*storybook.log
+storybook-static

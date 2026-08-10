@@ -146,7 +146,7 @@ export function AddPropertyForm({
         <button
           type="submit"
           disabled={isLoading}
-          className="h-9 rounded-[10px] bg-main-red px-6 text-sm text-blanc transition hover:bg-dark-orange disabled:cursor-wait disabled:opacity-60"
+          className="h-9 rounded-[10px] bg-main-red px-6 text-sm text-blanc transition-[background-color] hover:bg-dark-orange disabled:cursor-wait disabled:opacity-60"
         >
           {isLoading ? "Ajout en cours…" : "Ajouter"}
         </button>
@@ -348,7 +348,7 @@ export function AddPropertyForm({
                     aria-pressed={isSelected}
                     disabled={isLoading}
                     onClick={() => toggleCategory(category)}
-                    className={`h-8 rounded px-4 text-xs transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-main-red ${
+                    className={`h-8 rounded px-4 text-xs transition-[color,background-color] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-main-red ${
                       isSelected
                         ? "bg-main-red text-blanc"
                         : "bg-gris-light text-gris-dark"

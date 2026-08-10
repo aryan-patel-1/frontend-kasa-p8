@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import {
   mapApiProperty,
   type ApiProperty,
-} from "@/api/properties";
+} from "@/services/properties";
 import type { Property } from "@/types/property";
 
 type TokenPayload = {

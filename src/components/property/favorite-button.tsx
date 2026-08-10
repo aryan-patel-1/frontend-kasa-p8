@@ -78,7 +78,7 @@ export function FavoriteButton({
         aria-busy={isLoading}
         disabled={!enabled || isLoading}
         onClick={handleFavorite}
-        className={`group absolute right-4 top-4 z-10 flex size-8 items-center justify-center rounded transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-main-red ${
+        className={`group absolute right-4 top-4 z-10 flex size-8 items-center justify-center rounded transition-[background-color] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-main-red ${
           isFavorite ? "bg-main-red" : "bg-blanc hover:bg-main-red"
         } ${isLoading ? "opacity-70" : ""}`}
       >

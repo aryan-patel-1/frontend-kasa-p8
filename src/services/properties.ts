@@ -1,6 +1,6 @@
 import type { Property } from "@/types/property";
 
-// Représente exactement les champs renvoyés par le backend
+// Représente les champs renvoyés par le backend
 export type ApiProperty = {
   id: string;
   slug?: string;
