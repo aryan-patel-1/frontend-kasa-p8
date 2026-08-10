@@ -74,7 +74,7 @@ const apiDataProvider: DataProvider = {
 };
 
 // true utilise les mocks et false utilise le backend local
-export const USE_MOCK = false;
+export const USE_MOCK = true;
 
 // Les pages utilisent toujours ce fournisseur sans connaître la source choisie
 export const dataProvider = USE_MOCK ? mockDataProvider : apiDataProvider;

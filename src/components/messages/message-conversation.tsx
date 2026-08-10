@@ -83,7 +83,7 @@ export function MessageConversation({
               <span className="mt-1 size-7 shrink-0 rounded-md bg-gris-dark" />
               <div>
                 <p
-                  className={`flex items-center gap-1 text-[8px] text-gris-dark ${
+                  className={`flex items-center gap-1 text-xs text-gris-dark ${
                     message.isCurrentUser ? "justify-end" : ""
                   }`}
                 >

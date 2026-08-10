@@ -78,7 +78,7 @@ export function ConversationList({
                 {conversation.preview}
               </span>
             </span>
-            <span className="flex flex-col items-end gap-3 text-[10px] text-gris-dark">
+            <span className="flex flex-col items-end gap-3 text-xs text-gris-dark">
               {conversation.updatedAt}
               {conversation.isUnread ? (
                 <Image

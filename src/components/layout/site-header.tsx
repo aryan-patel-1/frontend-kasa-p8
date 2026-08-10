@@ -12,10 +12,10 @@ export function SiteHeader() {
   return (
     <>
       <header className="flex h-[85px] w-full shrink-0 items-center justify-between bg-blanc px-4 md:mt-10 md:h-[56px] md:w-[calc(100%-2rem)] md:max-w-[782px] md:rounded-[10px] md:px-10 md:shadow-[0_4px_4px_rgba(182,182,182,0.05)] lg:px-[100px]">
-        <Link href={ROUTES.home} aria-label="Retour à l'accueil">
+        <div>
           <Image
             src="/img/logos/logo-kasa-mark.svg"
-            alt=""
+            alt="Kasa"
             width={47}
             height={54}
             className="h-[54px] w-[47px] md:hidden"
@@ -29,7 +29,7 @@ export function SiteHeader() {
             className="hidden h-[40px] w-[113px] md:block"
             priority
           />
-        </Link>
+        </div>
 
         <nav
           aria-label="Navigation principale"
@@ -94,16 +94,16 @@ export function SiteHeader() {
       {isMenuOpen ? (
         <div className="fixed inset-0 z-50 flex min-h-dvh flex-col bg-blanc px-4 md:hidden">
           <div className="flex h-[85px] items-center justify-between">
-            <Link href={ROUTES.home} aria-label="Retour à l'accueil">
+            <div>
               <Image
                 src="/img/logos/logo-kasa-mark.svg"
-                alt=""
+                alt="Kasa"
                 width={47}
                 height={54}
                 className="h-[54px] w-[47px]"
                 priority
               />
-            </Link>
+            </div>
             <button
               type="button"
               aria-label="Fermer le menu"

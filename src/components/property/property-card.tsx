@@ -37,7 +37,7 @@ export function PropertyCard({
           {property.cover ? (
             <Image
               src={property.cover}
-              alt={property.title}
+              alt=""
               fill
               sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) 50vw, 355px"
               className="object-cover"
