@@ -1,14 +1,15 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import {
-  createMockSession,
-  setSessionCookie,
-  type SessionUser,
-} from "@/lib/auth-session";
-import { USE_MOCK } from "@/lib/config";
 
 type LoginResponse = {
   token?: string;
-  user?: SessionUser;
+  user?: {
+    id: number;
+    name: string;
+    email: string;
+    picture: string | null;
+    role: "client" | "owner" | "admin";
+  };
 };
 
 const API_URL = "http://localhost:3000";
@@ -37,21 +38,13 @@ export async function POST(request: Request) {
     );
   }
 
-  const email = credentials.email.trim().toLowerCase();
-
-  if (USE_MOCK) {
-    const result = createMockSession(email);
-    await setSessionCookie(result.token);
-    return NextResponse.json({ user: result.user });
-  }
-
   try {
     // Transmet uniquement les identifiants attendus par le back
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email,
+        email: credentials.email.trim().toLowerCase(),
         password: credentials.password,
       }),
       cache: "no-store",
@@ -76,7 +69,14 @@ export async function POST(request: Request) {
     }
 
     // Le cookie protège le jeton des scripts exécutés dans la page
-    await setSessionCookie(result.token);
+    const cookieStore = await cookies();
+    cookieStore.set("kasa-token", result.token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60,
+      path: "/",
+    });
 
     return NextResponse.json({ user: result.user });
   } catch {

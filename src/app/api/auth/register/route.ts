@@ -1,14 +1,15 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import {
-  createMockSession,
-  setSessionCookie,
-  type SessionUser,
-} from "@/lib/auth-session";
-import { USE_MOCK } from "@/lib/config";
 
 type RegisterResponse = {
   token?: string;
-  user?: SessionUser;
+  user?: {
+    id: number;
+    name: string;
+    email: string;
+    picture: string | null;
+    role: "client" | "owner" | "admin";
+  };
 };
 
 const API_URL = "http://localhost:3000";
@@ -49,23 +50,14 @@ export async function POST(request: Request) {
     );
   }
 
-  const name = `${registration.firstName.trim()} ${registration.lastName.trim()}`;
-  const email = registration.email.trim().toLowerCase();
-
-  if (USE_MOCK) {
-    const result = createMockSession(email, name);
-    await setSessionCookie(result.token);
-    return NextResponse.json({ user: result.user }, { status: 201 });
-  }
-
   try {
     // Regroupe le prénom et le nom dans le champ attendu par le backend
     const response = await fetch(`${API_URL}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        name,
-        email,
+        name: `${registration.firstName.trim()} ${registration.lastName.trim()}`,
+        email: registration.email.trim().toLowerCase(),
         password: registration.password,
       }),
       cache: "no-store",
@@ -90,7 +82,14 @@ export async function POST(request: Request) {
     }
 
     // Garde le jeton dans un cookie inaccessible au JavaScript de la page
-    await setSessionCookie(result.token);
+    const cookieStore = await cookies();
+    cookieStore.set("kasa-token", result.token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60,
+      path: "/",
+    });
 
     return NextResponse.json({ user: result.user }, { status: 201 });
   } catch {

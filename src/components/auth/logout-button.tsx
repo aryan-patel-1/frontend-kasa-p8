@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+import { USE_MOCK } from "@/lib/config";
 import { ROUTES } from "@/lib/routes";
 
 export function LogoutButton() {
@@ -18,7 +19,7 @@ export function LogoutButton() {
     }
   }
 
-  if (pathname === ROUTES.login) {
+  if (USE_MOCK || pathname === ROUTES.login) {
     return null;
   }
 
