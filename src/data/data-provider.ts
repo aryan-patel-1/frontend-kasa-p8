@@ -11,6 +11,7 @@ import { mockConversations } from "@/mocks/conversations";
 import { mockFavoritePropertyIds } from "@/mocks/favorites";
 import { mockProperties } from "@/mocks/properties";
 import { mockPropertyFormOptions } from "@/mocks/property-form-options";
+import { USE_MOCK } from "@/lib/config";
 import type { Conversation } from "@/types/message";
 import type { Property } from "@/types/property";
 import type { PropertyFormOptions } from "@/types/property-form-options";
@@ -73,8 +74,7 @@ const apiDataProvider: DataProvider = {
   getConversationById: getApiConversationById,
 };
 
-// true utilise les mocks et false utilise le backend local
-export const USE_MOCK = true;
+export { USE_MOCK };
 
 // Les pages utilisent toujours ce fournisseur sans connaître la source choisie
 export const dataProvider = USE_MOCK ? mockDataProvider : apiDataProvider;
