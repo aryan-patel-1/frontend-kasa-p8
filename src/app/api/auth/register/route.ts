@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { getApiUrl } from "@/lib/api-url";
 
 type RegisterResponse = {
   token?: string;
@@ -11,8 +12,6 @@ type RegisterResponse = {
     role: "client" | "owner" | "admin";
   };
 };
-
-const API_URL = "http://localhost:3000";
 
 export async function POST(request: Request) {
   let registration: {
@@ -52,7 +51,7 @@ export async function POST(request: Request) {
 
   try {
     // Regroupe le prénom et le nom dans le champ attendu par le backend
-    const response = await fetch(`${API_URL}/auth/register`, {
+    const response = await fetch(getApiUrl("/auth/register"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

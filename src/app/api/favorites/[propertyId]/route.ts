@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-
-const API_URL = "http://localhost:3000";
+import { getApiUrl } from "@/lib/api-url";
 
 type FavoriteRouteContext = {
   params: Promise<{ propertyId: string }>;
@@ -23,7 +22,9 @@ async function updateFavorite(
 
   const { propertyId } = await context.params;
   const response = await fetch(
-    `${API_URL}/api/properties/${encodeURIComponent(propertyId)}/favorite`,
+    getApiUrl(
+      `/api/properties/${encodeURIComponent(propertyId)}/favorite`,
+    ),
     {
       method,
       headers: { Authorization: `Bearer ${token}` },

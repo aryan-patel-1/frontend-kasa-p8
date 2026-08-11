@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { getApiUrl } from "@/lib/api-url";
 
 type LoginResponse = {
   token?: string;
@@ -11,8 +12,6 @@ type LoginResponse = {
     role: "client" | "owner" | "admin";
   };
 };
-
-const API_URL = "http://localhost:3000";
 
 export async function POST(request: Request) {
   let credentials: { email?: unknown; password?: unknown };
@@ -40,7 +39,7 @@ export async function POST(request: Request) {
 
   try {
     // Transmet uniquement les identifiants attendus par le back
-    const response = await fetch(`${API_URL}/auth/login`, {
+    const response = await fetch(getApiUrl("/auth/login"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

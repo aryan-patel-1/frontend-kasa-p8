@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { getApiUrl } from "@/lib/api-url";
 
-const API_URL = "http://localhost:3000";
 const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
 const MAX_IMAGE_COUNT = 6;
 
@@ -64,7 +64,7 @@ async function deleteUploadedImages(token: string, urls: string[]) {
   }
 
   // Nettoie les fichiers si la création échoue après leur envoi
-  await fetch(`${API_URL}/api/uploads/images`, {
+  await fetch(getApiUrl("/api/uploads/images"), {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -165,7 +165,7 @@ export async function POST(request: Request) {
         index === 0 ? "property-cover" : "property-picture",
       );
 
-      const uploadResponse = await fetch(`${API_URL}/api/uploads/image`, {
+      const uploadResponse = await fetch(getApiUrl("/api/uploads/image"), {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: uploadData,
@@ -194,7 +194,7 @@ export async function POST(request: Request) {
       hostPictureData.set("file", hostPicture);
       hostPictureData.set("purpose", "user-picture");
 
-      const hostPictureResponse = await fetch(`${API_URL}/api/uploads/image`, {
+      const hostPictureResponse = await fetch(getApiUrl("/api/uploads/image"), {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: hostPictureData,
@@ -219,7 +219,7 @@ export async function POST(request: Request) {
       uploadedUrls.push(hostPictureUrl);
     }
 
-    const hostResponse = await fetch(`${API_URL}/api/users/${userId}`, {
+    const hostResponse = await fetch(getApiUrl(`/api/users/${userId}`), {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -244,7 +244,7 @@ export async function POST(request: Request) {
       tags.push(customCategory);
     }
 
-    const propertyResponse = await fetch(`${API_URL}/api/properties`, {
+    const propertyResponse = await fetch(getApiUrl("/api/properties"), {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

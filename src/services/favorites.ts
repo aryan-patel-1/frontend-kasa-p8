@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { getApiUrl } from "@/lib/api-url";
 import {
   mapApiProperty,
   type ApiProperty,
@@ -8,8 +9,6 @@ import type { Property } from "@/types/property";
 type TokenPayload = {
   id?: unknown;
 };
-
-const API_URL = "http://localhost:3000";
 
 // Lit uniquement l'identifiant nécessaire pour construire la route backend
 function getUserId(token: string) {
@@ -45,7 +44,7 @@ export async function getApiFavoriteProperties(): Promise<Property[]> {
   }
 
   // Le backend vérifie le jeton et interdit l'accès aux autres comptes
-  const response = await fetch(`${API_URL}/api/users/${userId}/favorites`, {
+  const response = await fetch(getApiUrl(`/api/users/${userId}/favorites`), {
     headers: { Authorization: `Bearer ${token}` },
     cache: "no-store",
   });

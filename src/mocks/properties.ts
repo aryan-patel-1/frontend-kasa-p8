@@ -45,7 +45,7 @@ export const mockProperties: Property[] = [
     description:
       "Un appartement lumineux à quelques pas du canal, idéal pour découvrir les cafés et les promenades du quartier.",
     host: {
-      id: 2,
+      id: 1,
       name: "Nathalie Jean",
       picture: "/img/avatars/nathalie-jean.webp",
     },
@@ -65,7 +65,7 @@ export const mockProperties: Property[] = [
     description:
       "Un studio confortable et calme situé près du parc des Buttes-Chaumont.",
     host: {
-      id: 3,
+      id: 1,
       name: "Nathalie Jean",
       picture: "/img/avatars/nathalie-jean.webp",
     },
@@ -85,7 +85,7 @@ export const mockProperties: Property[] = [
     description:
       "Un petit cocon chaleureux au centre d’un quartier vivant et bien desservi.",
     host: {
-      id: 4,
+      id: 1,
       name: "Nathalie Jean",
       picture: "/img/avatars/nathalie-jean.webp",
     },
@@ -105,7 +105,7 @@ export const mockProperties: Property[] = [
     description:
       "Un appartement spacieux aux finitions soignées, proche des gares et des commerces.",
     host: {
-      id: 5,
+      id: 1,
       name: "Nathalie Jean",
       picture: "/img/avatars/nathalie-jean.webp",
     },
@@ -125,7 +125,7 @@ export const mockProperties: Property[] = [
     description:
       "Un studio singulier et lumineux au pied de Montmartre, pensé pour les séjours créatifs.",
     host: {
-      id: 6,
+      id: 1,
       name: "Nathalie Jean",
       picture: "/img/avatars/nathalie-jean.webp",
     },

@@ -20,15 +20,28 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 ## Data source
 
-La constante `USE_MOCK` dans `src/data/data-provider.ts` choisit la source :
+La constante `USE_MOCK` dans `src/lib/config.ts` choisit la source :
 
 - `true` utilise les données locales de `src/mocks`
-- `false` utilise le backend local sur `http://localhost:3000`
+- `false` utilise le backend défini par la variable `API_URL`
 
 L’API des logements alimente la page d’accueil et la fiche détail. Les favoris
 sont synchronisés avec le compte connecté. Les messages et les options du
 formulaire restent alimentés par les mocks en attendant la connexion de leurs
 routes API.
+
+## Variables d’environnement
+
+Next.js charge automatiquement le fichier correspondant à la commande :
+
+- `npm run dev` utilise `.env.development`
+- `npm run build` et `npm run start` utilisent `.env.production`
+- `npm test` utilise `.env.test`
+
+`API_URL` contient l’origine du backend, sans chemin de route. La valeur locale
+est `http://localhost:3000`. Avant un déploiement, remplacez la valeur d’exemple
+de `.env.production` par l’URL réelle du backend. Le fichier `.env.example`
+documente la variable à créer sans contenir de secret.
 
 ## Connexion
 

@@ -1,4 +1,5 @@
 import type { Property } from "@/types/property";
+import { getApiUrl } from "@/lib/api-url";
 
 // Représente les champs renvoyés par le backend
 export type ApiProperty = {
@@ -21,14 +22,6 @@ export type ApiProperty = {
   price_per_night?: number | null;
 };
 
-// Le frontend et le backend utilisent deux ports différents en local
-const API_URL = "http://localhost:3000";
-
-// Construit une adresse complète à partir du chemin de la route API
-function getApiUrl(path: string) {
-  return new URL(path, API_URL).toString();
-}
-
 // Transforme les chemins relatifs du backend en URL complète
 function getImageUrl(image: string | null | undefined) {
   if (!image) {
@@ -36,7 +29,7 @@ function getImageUrl(image: string | null | undefined) {
   }
 
   if (image.startsWith("/")) {
-    return new URL(image, API_URL).toString();
+    return getApiUrl(image);
   }
 
   return image;
