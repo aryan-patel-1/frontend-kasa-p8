@@ -10,6 +10,10 @@ import { ROUTES } from "@/lib/routes";
 export const metadata: Metadata = {
   title: "Ajouter une propriété",
   description: "Créez une nouvelle annonce de logement sur Kasa.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function AddPropertyPage() {

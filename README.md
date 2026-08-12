@@ -26,9 +26,9 @@ La constante `USE_MOCK` dans `src/lib/config.ts` choisit la source :
 - `false` utilise le backend défini par la variable `API_URL`
 
 L’API des logements alimente la page d’accueil et la fiche détail. Les favoris
-sont synchronisés avec le compte connecté. Les messages et les options du
-formulaire restent alimentés par les mocks en attendant la connexion de leurs
-routes API.
+sont synchronisés avec le compte connecté. Les conversations et les messages
+sont enregistrés dans la base SQLite du backend. Les options du formulaire
+restent alimentées par les mocks.
 
 ## Variables d’environnement
 
@@ -41,7 +41,20 @@ Next.js charge automatiquement le fichier correspondant à la commande :
 `API_URL` contient l’origine du backend, sans chemin de route. La valeur locale
 est `http://localhost:3000`. Avant un déploiement, remplacez la valeur d’exemple
 de `.env.production` par l’URL réelle du backend. Le fichier `.env.example`
-documente la variable à créer sans contenir de secret.
+documente les variables à créer sans contenir de secret.
+
+`SITE_URL` contient l’origine publique du frontend utilisée pour les URL
+canoniques et les données SEO. En local, sa valeur est
+`http://localhost:3001`. Sur Vercel, le projet utilise automatiquement
+`VERCEL_PROJECT_PRODUCTION_URL` lorsque `SITE_URL` n’est pas définie.
+
+## SEO
+
+Les pages publiques possèdent des métadonnées, des URL canoniques et des
+aperçus Open Graph. Les fiches logement exposent leurs informations en JSON-LD
+Schema.org afin que Google reconnaisse le logement, son prix et sa note. Le
+sitemap est disponible sur `/sitemap.xml` et les règles d’exploration sur
+`/robots.txt`.
 
 ## Connexion
 
@@ -50,7 +63,7 @@ Lancez aussi le backend sur `http://localhost:3000`, puis ouvrez la page
 enregistré dans la base SQLite du backend et peut ensuite se connecter sur
 `http://localhost:3001/login`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter.
 
 ## Learn More
 

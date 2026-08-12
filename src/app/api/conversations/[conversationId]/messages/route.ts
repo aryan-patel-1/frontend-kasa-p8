@@ -1,6 +1,9 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { addStoredMessage } from "@/lib/conversation-store";
+import {
+  addApiConversationMessage,
+  ConversationApiError,
+} from "@/services/conversations";
 
 export async function POST(
   request: Request,
@@ -40,20 +43,20 @@ export async function POST(
   const { conversationId } = await context.params;
 
   try {
-    const conversation = await addStoredMessage(
+    const conversation = await addApiConversationMessage(
       conversationId,
       body.content.trim(),
     );
 
-    if (!conversation) {
+    return NextResponse.json(conversation, { status: 201 });
+  } catch (error) {
+    if (error instanceof ConversationApiError) {
       return NextResponse.json(
-        { error: "Conversation introuvable" },
-        { status: 404 },
+        { error: error.message },
+        { status: error.status },
       );
     }
 
-    return NextResponse.json(conversation, { status: 201 });
-  } catch {
     return NextResponse.json(
       { error: "Impossible d’envoyer le message" },
       { status: 500 },

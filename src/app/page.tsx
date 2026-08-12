@@ -1,8 +1,33 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { PropertyCard } from "@/components/property/property-card";
 import { dataProvider, USE_MOCK } from "@/data/data-provider";
+
+export const metadata: Metadata = {
+  title: "Locations de vacances",
+  description:
+    "Découvrez les logements Kasa et trouvez votre prochaine location de vacances.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    siteName: "Kasa",
+    title: "Locations de vacances | Kasa",
+    description:
+      "Découvrez les logements Kasa et trouvez votre prochaine location de vacances.",
+    url: "/",
+    images: [
+      {
+        url: "/img/accueil/hero-accueil.webp",
+        alt: "Maison moderne proposée sur Kasa",
+      },
+    ],
+  },
+};
 
 // Décrit les étapes affichées sans dépendre d'une API
 const steps = [

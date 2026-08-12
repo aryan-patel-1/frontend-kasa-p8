@@ -7,6 +7,10 @@ import { dataProvider, USE_MOCK } from "@/data/data-provider";
 export const metadata: Metadata = {
   title: "Favoris",
   description: "Retrouvez les logements ajoutés à vos favoris.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function FavoritesPage() {

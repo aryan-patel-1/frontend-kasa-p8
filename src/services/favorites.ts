@@ -1,33 +1,11 @@
 import { cookies } from "next/headers";
 import { getApiUrl } from "@/lib/api-url";
+import { getTokenUserId } from "@/lib/auth-token";
 import {
   mapApiProperty,
   type ApiProperty,
 } from "@/services/properties";
 import type { Property } from "@/types/property";
-
-type TokenPayload = {
-  id?: unknown;
-};
-
-// Lit uniquement l'identifiant nécessaire pour construire la route backend
-function getUserId(token: string) {
-  const encodedPayload = token.split(".")[1];
-
-  if (!encodedPayload) {
-    return null;
-  }
-
-  try {
-    const payload = JSON.parse(
-      Buffer.from(encodedPayload, "base64url").toString("utf8"),
-    ) as TokenPayload;
-
-    return typeof payload.id === "number" ? payload.id : null;
-  } catch {
-    return null;
-  }
-}
 
 // Récupère les favoris du compte identifié par le cookie de connexion
 export async function getApiFavoriteProperties(): Promise<Property[]> {
@@ -37,7 +15,7 @@ export async function getApiFavoriteProperties(): Promise<Property[]> {
     return [];
   }
 
-  const userId = getUserId(token);
+  const userId = getTokenUserId(token);
 
   if (!userId) {
     return [];

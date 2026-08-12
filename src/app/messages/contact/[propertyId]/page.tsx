@@ -1,7 +1,18 @@
+import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import { dataProvider } from "@/data/data-provider";
-import { getOrCreateStoredConversation } from "@/lib/conversation-store";
+import { dataProvider, USE_MOCK } from "@/data/data-provider";
+import { getTokenUserId } from "@/lib/auth-token";
 import { ROUTES } from "@/lib/routes";
+import { getOrCreateApiConversation } from "@/services/conversations";
+
+export const metadata: Metadata = {
+  title: "Contacter l’hôte",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function ContactHostPage(
   props: PageProps<"/messages/contact/[propertyId]">,
@@ -13,7 +24,24 @@ export default async function ContactHostPage(
     notFound();
   }
 
+  if (USE_MOCK) {
+    const conversations = await dataProvider.getConversations();
+    const conversation = conversations.find(
+      (item) => item.participantId === property.host.id,
+    );
+
+    redirect(
+      conversation ? ROUTES.conversation(conversation.id) : ROUTES.messages,
+    );
+  }
+
+  const token = (await cookies()).get("kasa-token")?.value;
+
+  if (token && getTokenUserId(token) === property.host.id) {
+    redirect(ROUTES.property(property.id));
+  }
+
   // Réutilise la discussion pour ne pas créer de doublon avec le même hôte
-  const conversation = await getOrCreateStoredConversation(property.host);
+  const conversation = await getOrCreateApiConversation(property.host);
   redirect(ROUTES.conversation(conversation.id));
 }

@@ -8,6 +8,10 @@ import { dataProvider } from "@/data/data-provider";
 export const metadata: Metadata = {
   title: "Messagerie",
   description: "Consultez vos conversations et envoyez des messages sur Kasa.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function MessagesPage() {

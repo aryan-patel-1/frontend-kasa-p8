@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { getStoredConversations } from "@/lib/conversation-store";
+import { getApiConversations } from "@/services/conversations";
 
 export async function GET() {
   const token = (await cookies()).get("kasa-token")?.value;
@@ -13,7 +13,7 @@ export async function GET() {
   }
 
   try {
-    return NextResponse.json(await getStoredConversations());
+    return NextResponse.json(await getApiConversations());
   } catch {
     return NextResponse.json(
       { error: "Impossible de charger les conversations" },

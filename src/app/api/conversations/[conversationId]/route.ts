@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { getStoredConversationById } from "@/lib/conversation-store";
+import { getApiConversationById } from "@/services/conversations";
 
 export async function GET(
   _request: Request,
@@ -18,7 +18,7 @@ export async function GET(
   const { conversationId } = await context.params;
 
   try {
-    const conversation = await getStoredConversationById(conversationId);
+    const conversation = await getApiConversationById(conversationId);
 
     if (!conversation) {
       return NextResponse.json(

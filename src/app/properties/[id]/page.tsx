@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { dataProvider } from "@/data/data-provider";
+import { getTokenUserId } from "@/lib/auth-token";
 import { ROUTES } from "@/lib/routes";
+import {
+  getPropertyStructuredData,
+  serializeStructuredData,
+} from "@/lib/structured-data";
 
 export async function generateMetadata(
   props: PageProps<"/properties/[id]">,
@@ -17,6 +23,46 @@ export async function generateMetadata(
   return {
     title: property?.title ?? "Logement introuvable",
     description: property?.description,
+    alternates: property
+      ? {
+          canonical: ROUTES.property(property.id),
+        }
+      : undefined,
+    openGraph: property
+      ? {
+          type: "website",
+          locale: "fr_FR",
+          siteName: "Kasa",
+          title: property.title,
+          description: property.description,
+          url: ROUTES.property(property.id),
+          images: property.cover
+            ? [
+                {
+                  url: property.cover,
+                  alt: property.title,
+                },
+              ]
+            : [],
+        }
+      : undefined,
+    twitter: property
+      ? {
+          card: "summary_large_image",
+          title: property.title,
+          description: property.description,
+          images: property.cover ? [property.cover] : [],
+        }
+      : undefined,
+    robots: property
+      ? {
+          index: true,
+          follow: true,
+        }
+      : {
+          index: false,
+          follow: false,
+        },
   };
 }
 
@@ -31,6 +77,10 @@ export default async function PropertyPage(
     notFound();
   }
 
+  const token = (await cookies()).get("kasa-token")?.value;
+  const currentUserId = token ? getTokenUserId(token) : null;
+  const isCurrentUserHost = currentUserId === property.host.id;
+
   // Limite la galerie aux cinq emplacements de la maquette
   const galleryPictures = [property.cover, ...property.pictures]
     .filter((picture): picture is string => picture !== null)
@@ -38,6 +88,14 @@ export default async function PropertyPage(
 
   return (
     <div className="flex min-h-dvh flex-col items-center bg-light-orange">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeStructuredData(
+            getPropertyStructuredData(property),
+          ),
+        }}
+      />
       <SiteHeader />
 
       <main className="w-full max-w-[970px] flex-1 px-4 pb-28 lg:mt-[102px] lg:px-0 lg:pb-20">
@@ -172,22 +230,28 @@ export default async function PropertyPage(
                 </p>
               </div>
 
-              <div className="mt-6 flex flex-col gap-2">
-                <Link
-                  href={ROUTES.contactHost(property.id)}
-                  prefetch={false}
-                  className="flex h-9 items-center justify-center rounded-[10px] bg-main-red text-sm text-blanc"
-                >
-                  Contacter l’hôte
-                </Link>
-                <Link
-                  href={ROUTES.contactHost(property.id)}
-                  prefetch={false}
-                  className="flex h-9 items-center justify-center rounded-[10px] bg-main-red text-sm text-blanc"
-                >
-                  Envoyer un message
-                </Link>
-              </div>
+              {isCurrentUserHost ? (
+                <p className="mt-6 rounded-[10px] bg-gris-light px-4 py-3 text-center text-sm text-gris-dark">
+                  Vous êtes l’hôte de ce logement
+                </p>
+              ) : (
+                <div className="mt-6 flex flex-col gap-2">
+                  <Link
+                    href={ROUTES.contactHost(property.id)}
+                    prefetch={false}
+                    className="flex h-9 items-center justify-center rounded-[10px] bg-main-red text-sm text-blanc"
+                  >
+                    Contacter l’hôte
+                  </Link>
+                  <Link
+                    href={ROUTES.contactHost(property.id)}
+                    prefetch={false}
+                    className="flex h-9 items-center justify-center rounded-[10px] bg-main-red text-sm text-blanc"
+                  >
+                    Envoyer un message
+                  </Link>
+                </div>
+              )}
             </aside>
           </div>
         </div>

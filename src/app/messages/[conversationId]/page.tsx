@@ -11,6 +11,10 @@ import { ROUTES } from "@/lib/routes";
 
 export const metadata: Metadata = {
   title: "Discussion",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function ConversationPage(

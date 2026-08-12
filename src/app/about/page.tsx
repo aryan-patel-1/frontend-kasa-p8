@@ -7,6 +7,24 @@ export const metadata: Metadata = {
   title: "À propos",
   description:
     "Découvrez la mission de Kasa et notre engagement pour des séjours uniques.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    siteName: "Kasa",
+    title: "À propos | Kasa",
+    description:
+      "Découvrez la mission de Kasa et notre engagement pour des séjours uniques.",
+    url: "/about",
+    images: [
+      {
+        url: "/img/a-propos/hero.webp",
+        alt: "Maison en bois présentée par Kasa",
+      },
+    ],
+  },
 };
 
 export default function AboutPage() {

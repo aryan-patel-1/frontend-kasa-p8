@@ -8,6 +8,10 @@ import { ROUTES } from "@/lib/routes";
 
 export const metadata: Metadata = {
   title: "Inscription",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function SignUpPage() {
