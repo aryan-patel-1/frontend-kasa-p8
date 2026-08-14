@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { getApiUrl } from "@/lib/api-url";
 
@@ -68,8 +67,8 @@ export async function POST(request: Request) {
     }
 
     // Le cookie protège le jeton des scripts exécutés dans la page
-    const cookieStore = await cookies();
-    cookieStore.set("kasa-token", result.token, {
+    const responseWithSession = NextResponse.json({ user: result.user });
+    responseWithSession.cookies.set("kasa-token", result.token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -77,7 +76,7 @@ export async function POST(request: Request) {
       path: "/",
     });
 
-    return NextResponse.json({ user: result.user });
+    return responseWithSession;
   } catch {
     return NextResponse.json(
       { error: "Impossible de joindre le serveur Kasa" },

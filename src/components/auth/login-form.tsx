@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { SubmitEvent, useState } from "react";
 import { ROUTES } from "@/lib/routes";
 
 export function LoginForm() {
-  const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,8 +32,8 @@ export function LoginForm() {
         return;
       }
 
-      router.push(ROUTES.home);
-      router.refresh();
+      // Recharge le document pour que Safari envoie le nouveau cookie
+      window.location.assign(ROUTES.home);
     } catch {
       setErrorMessage("Le serveur est momentanément indisponible");
     } finally {
