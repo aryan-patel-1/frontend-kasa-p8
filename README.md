@@ -56,6 +56,21 @@ Schema.org afin que Google reconnaisse le logement, son prix et sa note. Le
 sitemap est disponible sur `/sitemap.xml` et les règles d’exploration sur
 `/robots.txt`.
 
+## Storybook
+
+Storybook documente les composants principaux de Kasa sans lancer toutes les
+pages de l’application. Les stories sont rangées à côté des composants dans
+`src/components` et leurs pages de documentation sont générées automatiquement.
+
+```bash
+npm run storybook
+```
+
+Ouvrez ensuite [http://localhost:6006](http://localhost:6006). Les groupes
+`Layout`, `Logements`, `Messagerie` et `Authentification` présentent les états
+importants des composants. `npm run build-storybook` vérifie que la
+documentation peut être générée pour un déploiement statique.
+
 ## Connexion
 
 Lancez aussi le backend sur `http://localhost:3000`, puis ouvrez la page
