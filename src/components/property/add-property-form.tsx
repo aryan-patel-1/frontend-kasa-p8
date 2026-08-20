@@ -42,10 +42,10 @@ function ImageField({
         </p>
         <label
           htmlFor={id}
-          aria-label={`Choisir ${label.toLowerCase()}`}
           className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-md bg-main-red text-2xl font-light leading-none text-blanc focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-main-red"
         >
           <span aria-hidden="true">+</span>
+          <span className="sr-only">Choisir {label.toLowerCase()}</span>
           <input
             id={id}
             name={name}
@@ -163,7 +163,7 @@ export function AddPropertyForm({
 
       {/* Réorganise les blocs en deux colonnes sur desktop */}
       <div className="mt-4 grid grid-cols-1 gap-4 lg:mt-10 lg:grid-cols-2 lg:items-start">
-        <section className="rounded-[10px] border border-gris-light bg-blanc p-4 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:min-h-[544px] lg:px-20 lg:py-20">
+        <div className="rounded-[10px] border border-gris-light bg-blanc p-4 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:min-h-[544px] lg:px-20 lg:py-20">
           <div>
             <label htmlFor="property-title" className="text-sm font-medium">
               Titre de la propriété
@@ -237,9 +237,9 @@ export function AddPropertyForm({
               className={fieldClass}
             />
           </div>
-        </section>
+        </div>
 
-        <section className="space-y-4 rounded-[10px] border border-gris-light bg-blanc p-4 lg:col-start-2 lg:row-start-1 lg:min-h-[264px] lg:px-20 lg:py-12">
+        <div className="space-y-4 rounded-[10px] border border-gris-light bg-blanc p-4 lg:col-start-2 lg:row-start-1 lg:min-h-[264px] lg:px-20 lg:py-12">
           <ImageField
             id="cover-image"
             name="coverImage"
@@ -270,10 +270,9 @@ export function AddPropertyForm({
           >
             +Ajouter une image
           </label>
+        </div>
 
-        </section>
-
-        <section className="space-y-4 rounded-[10px] border border-gris-light bg-blanc p-4 lg:col-start-2 lg:row-start-2 lg:min-h-[264px] lg:px-20 lg:py-12">
+        <div className="space-y-4 rounded-[10px] border border-gris-light bg-blanc p-4 lg:col-start-2 lg:row-start-2 lg:min-h-[264px] lg:px-20 lg:py-12">
           <div>
             <label htmlFor="host-name" className="text-sm font-medium">
               Nom de l’hôte
@@ -302,7 +301,7 @@ export function AddPropertyForm({
           >
             +Ajouter une image
           </label>
-        </section>
+        </div>
 
         <section className="rounded-[10px] border border-gris-light bg-blanc p-4 lg:col-start-1 lg:row-start-3 lg:min-h-[584px] lg:px-20 lg:py-16">
           <h2 className="text-sm font-medium">Équipements</h2>
@@ -326,7 +325,7 @@ export function AddPropertyForm({
           </fieldset>
         </section>
 
-        <section className="rounded-[10px] border border-gris-light bg-blanc p-4 lg:col-start-2 lg:row-start-3 lg:min-h-[444px] lg:px-20 lg:py-16">
+        <div className="rounded-[10px] border border-gris-light bg-blanc p-4 lg:col-start-2 lg:row-start-3 lg:min-h-[444px] lg:px-20 lg:py-16">
           <fieldset>
             <legend className="text-sm font-medium">Catégories</legend>
             {selectedCategories.map((category) => (
@@ -400,7 +399,7 @@ export function AddPropertyForm({
               +Ajouter un tag
             </button>
           </div>
-        </section>
+        </div>
       </div>
     </form>
   );
