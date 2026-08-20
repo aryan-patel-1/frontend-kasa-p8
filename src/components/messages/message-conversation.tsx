@@ -67,7 +67,7 @@ export function MessageConversation({
   }
 
   return (
-    <section className="flex h-full min-h-0 flex-col bg-light-orange">
+    <div className="flex h-full min-h-0 flex-col bg-light-orange">
       <div
         aria-live="polite"
         className="flex-1 space-y-10 overflow-y-auto px-2 py-10 sm:px-10"
@@ -158,6 +158,6 @@ export function MessageConversation({
           </button>
         </div>
       </form>
-    </section>
+    </div>
   );
 }

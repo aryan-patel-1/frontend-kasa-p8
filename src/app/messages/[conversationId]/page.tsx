@@ -31,11 +31,14 @@ export default async function ConversationPage(
   }
 
   return (
-    <>
-      {/* Affiche seulement la discussion sur mobile */}
-      <div className="flex min-h-dvh flex-col bg-blanc lg:hidden">
+    <div className="flex min-h-dvh flex-col bg-blanc">
+      <div className="lg:hidden">
         <SiteHeader />
-        <main className="flex min-h-0 flex-1 flex-col">
+      </div>
+
+      <main className="min-h-0 flex-1">
+        {/* Affiche seulement la discussion sur mobile */}
+        <div className="flex min-h-full flex-col lg:hidden">
           <div className="bg-blanc px-2 py-4">
             <Link
               href={ROUTES.messages}
@@ -53,21 +56,24 @@ export default async function ConversationPage(
           <div className="min-h-[620px] flex-1">
             <MessageConversation conversation={conversation} />
           </div>
-        </main>
-        <SiteFooter />
-      </div>
+        </div>
 
-      {/* Conserve les deux panneaux sur desktop */}
-      <main className="hidden h-dvh bg-blanc p-4 lg:block">
-        <div className="mx-auto grid h-full max-w-[1328px] grid-cols-[470px_1fr] overflow-hidden rounded-[10px] border border-gris-light">
-          <ConversationList
-            conversations={conversations}
-            activeConversationId={conversation.id}
-            compact
-          />
-          <MessageConversation conversation={conversation} />
+        {/* Conserve les deux panneaux sur desktop */}
+        <div className="hidden h-dvh p-4 lg:block">
+          <div className="mx-auto grid h-full max-w-[1328px] grid-cols-[470px_1fr] overflow-hidden rounded-[10px] border border-gris-light">
+            <ConversationList
+              conversations={conversations}
+              activeConversationId={conversation.id}
+              compact
+            />
+            <MessageConversation conversation={conversation} />
+          </div>
         </div>
       </main>
-    </>
+
+      <div className="lg:hidden">
+        <SiteFooter />
+      </div>
+    </div>
   );
 }
