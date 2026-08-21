@@ -10,7 +10,12 @@ const meta = {
     docs: {
       description: {
         component:
-          "Navigation principale de Kasa. Elle affiche les liens du site sur ordinateur et le bouton du menu sur mobile.",
+          "`SiteHeader` fournit la navigation principale sur toutes les pages de Kasa.\n\n" +
+          "- **Sur ordinateur** : affiche le logo complet, les liens Accueil et À propos, l’ajout d’un logement, les favoris et la messagerie\n" +
+          "- **Sur mobile** : remplace les liens par un bouton qui ouvre un menu plein écran\n" +
+          "- **Comportement** : l’ouverture du menu est gérée localement avec `useState`\n" +
+          "- **Accessibilité** : les deux navigations ont un nom explicite, le bouton expose son état avec `aria-expanded` et toutes les actions restent accessibles au clavier\n\n" +
+          "Le composant ne reçoit aucune prop : les destinations viennent de `ROUTES` afin de centraliser les URL de l’application.",
       },
     },
   },
@@ -20,6 +25,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const NavigationPrincipale: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Affichage par défaut. Réduisez la largeur du canvas pour observer le passage de la navigation desktop au bouton du menu mobile.",
+      },
+    },
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 

@@ -22,8 +22,35 @@ const meta = {
     docs: {
       description: {
         component:
-          "Carte utilisée dans les listes de logements. Les contrôles permettent de modifier le logement et son état favori.",
+          "`PropertyCard` présente un logement dans les grilles de l’accueil et des favoris.\n\n" +
+          "- affiche la couverture, le titre, la localisation et le prix par nuit\n" +
+          "- transforme la zone de contenu en lien vers la fiche détaillée\n" +
+          "- garde le bouton favori en dehors du lien pour éviter d’imbriquer deux contrôles interactifs\n" +
+          "- remplace une couverture absente par un état « Image indisponible »\n" +
+          "- adapte la requête d’image à la largeur du viewport grâce à `next/image`\n\n" +
+          "Utilisez les contrôles pour tester une autre propriété, les droits de modification et le rafraîchissement après une action favorite.",
       },
+    },
+  },
+  argTypes: {
+    property: {
+      description:
+        "Toutes les données publiques du logement affiché : identifiant, titre, couverture, lieu, prix et informations complémentaires.",
+      control: "object",
+    },
+    isFavorite: {
+      description: "Détermine l’état initial du bouton favori.",
+      control: "boolean",
+    },
+    canUpdateFavorite: {
+      description:
+        "Autorise l’ajout ou le retrait du favori. Le bouton reste visible mais désactivé lorsque la valeur est `false`.",
+      control: "boolean",
+    },
+    refreshAfterFavoriteUpdate: {
+      description:
+        "Rafraîchit les composants serveur après la requête, notamment pour retirer une carte de la page Favoris.",
+      control: "boolean",
     },
   },
   beforeEach: () => {
@@ -45,11 +72,28 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Disponible: Story = {};
+export const Disponible: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Carte standard d’un logement disponible. Le favori est modifiable et commence dans l’état inactif.",
+      },
+    },
+  },
+};
 
 export const DansLesFavoris: Story = {
   args: {
     isFavorite: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Variante avec le favori déjà actif. L’icône et `aria-pressed` indiquent cet état sans dépendre uniquement de la couleur.",
+      },
+    },
   },
 };
 
@@ -62,9 +106,25 @@ export const SansImage: Story = {
     },
     canUpdateFavorite: false,
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "État de repli utilisé quand l’API ne fournit ni couverture ni galerie. Le bouton favori est désactivé dans cet exemple.",
+      },
+    },
+  },
 };
 
 export const AjoutAuxFavoris: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Scénario interactif qui ajoute le logement aux favoris, puis vérifie l’état accessible du bouton et la requête `POST` envoyée.",
+      },
+    },
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole("button", {

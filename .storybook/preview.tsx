@@ -20,7 +20,10 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ["Kasa", ["Layout", "Logements", "Messagerie", "Authentification"]],
+        order: [
+          "Kasa",
+          ["Layout", "Logements", "Messagerie", "Authentification", "Interface"],
+        ],
       },
     },
   },

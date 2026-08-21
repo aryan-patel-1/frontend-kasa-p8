@@ -14,7 +14,12 @@ const meta = {
     docs: {
       description: {
         component:
-          "Pied de page commun avec le logo Kasa, le copyright et l’action de déconnexion.",
+          "`SiteFooter` termine les pages de Kasa avec les informations et actions communes.\n\n" +
+          "- affiche la marque Kasa et le copyright\n" +
+          "- intègre `LogoutButton` lorsque l’application utilise le backend et que la page courante n’est pas la connexion\n" +
+          "- empile son contenu sur mobile, puis l’aligne horizontalement à partir du breakpoint `sm`\n" +
+          "- utilise un élément HTML `footer` pour donner un repère clair aux technologies d’assistance\n\n" +
+          "Le composant ne reçoit aucune prop. La visibilité de la déconnexion dépend du contexte de navigation et de `USE_MOCK`.",
       },
     },
   },
@@ -23,4 +28,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const ParDefaut: Story = {};
+export const ParDefaut: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Pied de page complet dans le contexte de la page d’accueil. Le bouton de déconnexion est visible quand le mode backend est actif.",
+      },
+    },
+  },
+};

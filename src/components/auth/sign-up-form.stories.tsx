@@ -16,7 +16,13 @@ const meta = {
     docs: {
       description: {
         component:
-          "Formulaire de création de compte avec les informations personnelles, le mot de passe et l’acceptation des conditions.",
+          "`SignUpForm` rassemble les informations nécessaires à la création d’un compte Kasa.\n\n" +
+          "- collecte le nom, le prénom, l’adresse email et un mot de passe d’au moins six caractères\n" +
+          "- exige l’acceptation des conditions générales grâce à la validation HTML native\n" +
+          "- envoie les données à `POST /api/auth/register`\n" +
+          "- désactive les contrôles pendant l’envoi et affiche les erreurs dans une zone `role=\"alert\"`\n" +
+          "- redirige vers l’accueil et rafraîchit les composants serveur après une inscription réussie\n\n" +
+          "Le composant ne reçoit aucune prop. Les libellés associés aux champs et les attributs `autocomplete` facilitent la saisie au clavier et avec un gestionnaire de mots de passe.",
       },
     },
   },
@@ -25,4 +31,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FormulaireVide: Story = {};
+export const FormulaireVide: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "État initial du parcours d’inscription, utile pour vérifier l’ordre des champs, les contraintes natives et l’adaptation mobile ou desktop.",
+      },
+    },
+  },
+};

@@ -18,8 +18,27 @@ const meta = {
     docs: {
       description: {
         component:
-          "Formulaire complet de création d’un logement avec photos, équipements et catégories personnalisées.",
+          "`AddPropertyForm` regroupe toutes les informations nécessaires pour publier un logement.\n\n" +
+          "- demande le titre, la description, la localisation, le prix, l’hôte et une couverture\n" +
+          "- accepte plusieurs photos du logement ainsi qu’une photo de profil pour l’hôte\n" +
+          "- permet de sélectionner plusieurs équipements et catégories avec des boutons `aria-pressed`\n" +
+          "- autorise l’ajout d’une catégorie personnalisée sans modifier les options reçues du serveur\n" +
+          "- construit un `FormData` pour conserver les fichiers, désactive les champs pendant l’envoi et redirige vers le logement créé\n" +
+          "- affiche les erreurs de publication dans une zone `role=\"alert\"`\n\n" +
+          "Les props fournissent les choix disponibles ; l’état des sélections et des fichiers reste interne au formulaire.",
       },
+    },
+  },
+  argTypes: {
+    equipments: {
+      description:
+        "Liste des équipements proposés par l’API, par exemple Wi-Fi, lave-linge ou climatisation.",
+      control: "object",
+    },
+    categories: {
+      description:
+        "Liste initiale des catégories proposées. L’utilisateur peut compléter cette liste dans le formulaire.",
+      control: "object",
     },
   },
   args: {
@@ -31,9 +50,26 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FormulaireVide: Story = {};
+export const FormulaireVide: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Formulaire dans son état initial avec les équipements et catégories issus des données de démonstration.",
+      },
+    },
+  },
+};
 
 export const AjoutCategoriePersonnalisee: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Scénario interactif qui ajoute « Terrasse » puis vérifie que la nouvelle catégorie est immédiatement sélectionnée avec `aria-pressed`.",
+      },
+    },
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText(

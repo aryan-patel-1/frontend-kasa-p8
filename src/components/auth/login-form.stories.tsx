@@ -25,7 +25,13 @@ const meta = {
     docs: {
       description: {
         component:
-          "Formulaire de connexion avec validation native, état de chargement et message d’erreur serveur.",
+          "`LoginForm` permet à une personne déjà inscrite d’ouvrir une session.\n\n" +
+          "- demande une adresse email et un mot de passe avec la validation HTML native\n" +
+          "- envoie les valeurs à `POST /api/auth/login` sans exposer directement le backend\n" +
+          "- désactive les champs pendant la requête et remplace le libellé du bouton par « Connexion… »\n" +
+          "- affiche les erreurs de l’API dans une zone `role=\"alert\"`\n" +
+          "- recharge l’accueil après le succès afin que le cookie de session soit pris en compte\n\n" +
+          "Le composant ne reçoit aucune prop. La story remplace `fetch` pour documenter les erreurs sans appeler un vrai serveur.",
       },
     },
   },
@@ -42,9 +48,26 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FormulaireVide: Story = {};
+export const FormulaireVide: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "État initial du formulaire. Il permet de contrôler les libellés, les champs obligatoires, le lien d’inscription et le comportement responsive.",
+      },
+    },
+  },
+};
 
 export const IdentifiantsInvalides: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Scénario interactif : la story remplit le formulaire, simule une réponse HTTP 401 et vérifie que le message serveur est annoncé dans la zone d’alerte.",
+      },
+    },
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
